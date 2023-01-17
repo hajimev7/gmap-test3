@@ -1,0 +1,68 @@
+<head>
+  <meta charset="UTF-8">
+  <style type="text/css">
+    div {
+      margin: 10px;
+    }
+  </style>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQZJqUef7EmtlLd46KVNypuzvpJJc7w_Y&libraries=places&callback=initMap">
+  </script>
+  <script src="sample.js"></script>
+
+</head>
+<body>
+  <main role="main">
+    <section>
+      <div>
+        <div>
+          <span>検索方法: </span>
+          <input type="radio" name="serchMethod" id="radioText" value="text" checked onchange="selectText()">
+          <label for="radioText">テキスト入力</label>
+          <input type="radio" name="serchMethod" id="radioCurrent" value="current" onchange="selectCurrent()">
+          <label for="radioCurrent">現在地</label>
+        </div>
+        <div>
+          <span>検索場所: </span>
+          <input type="text" id="location" value="東京駅">
+          <span id="currentLocation"></span>
+        </div>
+        <div>
+          <span>検索ワード: </span>
+          <input type="text" id="serachWord" value="レストラン">
+        </div>
+        <div>
+          <span>検索範囲: </span>
+          <select id="radius">
+            <option value="300">300m</option>
+            <option value="500" selected>500m</option>
+            <option value="800">800m</option>
+            <option value="1000">1km</option>
+            <option value="2000">2km</option>
+          </select>
+        </div>
+        <div>
+          <span>口コミ件数: </span>
+          <select id="numberOfReviews">
+            <option value="10">10件</option>
+            <option value="50">50件</option>
+            <option value="100" selected>100件</option>
+            <option value="200">200件</option>
+            <option value="300">300件</option>
+            <select>
+        </div>
+        <div>
+          <button onclick="search()">検索開始</button>
+        </div>
+      </div>
+      </div>
+      <td style="width: 50%;">
+        <h4>検索結果</h4>
+        <div id="results" style="border: solid; height: 400px; overflow-y: scroll;"></div>
+      </td>
+      <div id="map" style="height:400px;">マップが表示されます</div>
+    </section>
+  </main>
+</body>
+
+<%= javascript_pack_tag 'map/index' %>
