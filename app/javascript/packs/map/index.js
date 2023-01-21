@@ -3,6 +3,10 @@ let mergedResults;
 /** 初期表示 */
 function initMap() { }
 /** テキスト入力選択 */
+function test(){
+  console.log('test')
+}
+
 function selectText() {
   document.getElementById("location").disabled = false;
 }
