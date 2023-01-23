@@ -5,9 +5,8 @@
       margin: 10px;
     }
   </style>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQZJqUef7EmtlLd46KVNypuzvpJJc7w_Y&libraries=places&callback=initMap">
-  </script>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&libraries=places&callback=initMap"></script>
   <script src="sample.js"></script>
 
 </head>
@@ -64,6 +63,8 @@
     </section>
   </main>
 </body>
+
+
 
 <script>
   /** 検索結果 */

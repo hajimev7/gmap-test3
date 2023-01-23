@@ -1,0 +1,60 @@
+<div class="bg-info">
+	<h1 class="container text-white pt-2 pb-2">Cross-search</h1>
+</div>
+<div class='container mt-4'>
+<section>
+<%= form_tag("/movies", { class: 'row' }) do %>
+<div class='form-group col-sm-5'><input type="text" name="keyword" class="form-control" placeholder="keyword" value="<%= @keyword %>"></div>
+<div class='col-sm-3'>
+	<label class="checkbox-inline"><input type="checkbox" name="engine[0]" value="google" <%= "checked" if @engine && @engine["0"] %>> google</label>　
+	<label class="checkbox-inline"><input type="checkbox" name="engine[1]" value="bing" <%= "checked" if @engine && @engine["1"] %>> bing </label>
+</div>
+<div class='form-group col-sm-4'><select name="update" class="form-control">
+	<option value="0" <%= "selected" if @update == "0" %>>last updated: 指定なし</option>
+	<option value="1" <%= "selected" if @update == "1" %>>24時間以内</option>
+	<option value="2" <%= "selected" if @update == "2" %>>7日以内</option>
+	<option value="3" <%= "selected" if @update == "3" %>>1ヶ月以内</option>
+</select></div>
+<p class="text-right col-sm-12"><input class="btn btn-default" type="submit" value="Submit"></p>
+<% end %>
+</section>
+
+<hr>
+
+<section>
+<% if @keyword %>
+<h2 class="text-success"><strong>Search results for <%= @keyword %></strong></h2>
+<% end %>
+<div class="row">
+<% if @strings %>
+<div class="<% if @strings && @strings2 %>col-sm-6<% else %>col-sm-12<%end%>">
+	<h3>Google</h3>
+	<div class='table-responsive'>
+	<table class='table table-striped'>
+		<tr><th>No.</th><th>Title/URL</th></tr>
+		<% for i in 0...@strings.length do
+		  url, title = (@strings[i][0].scan(%r{<a href="(.+?)".+?>(.+?)</a>}))[0] %>
+		<tr><th><%= i + 1 %></th><td><%= link_to(title,url,{ :target => '_blank'}) %></td></tr>
+		<% end %>
+	</table>
+	</div>
+</div>
+<% end %>
+<% if @strings2 %>
+<div class="<% if @strings && @strings2 %>col-sm-6<% else %>col-sm-12<%end%>">
+	<h3>bing</h3>
+	<div class='table-responsive'>
+	<table class='table table-striped'>
+		<tr><th>No.</th><th>Title/URL</th></tr>
+		<% for i in 0...@strings2.length do
+		  url, title = (@strings2[i][0].scan(%r{<a href="(.+?)".+?>(.+?)</a>}))[0] %>
+		<tr><th><%= i + 1 %></th><td><%= link_to(strip_tags(title),url,{ :target => '_blank'}) %></td></tr>
+		<% end %>
+	</table>
+	</div>
+</div>
+<% end %>
+</div>
+</section>
+
+</div>

@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   resources :maps
   get '/' => 'maps#index'
   post '/' => 'maps#index'
+  #resources :movies
+  get '/movies' => 'movies#index'
+  post '/movies' => 'movies#index'
 end
